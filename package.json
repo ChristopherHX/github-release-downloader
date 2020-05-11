@@ -19,7 +19,7 @@
     "grd": "./bin/grd"
   },
   "scripts": {
-    "build": "babel src -d build"
+    "build": "./node_modules/.bin/babel src -d build"
   },
   "dependencies": {
     "axios": "^0.19.0",
