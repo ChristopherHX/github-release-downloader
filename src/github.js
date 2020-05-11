@@ -71,13 +71,19 @@ export class GitHub {
         }
         releases = response.data.data.repository.releases;
         const releaseInfo = releases.nodes[0]; // only one release at a time
+        var semverchk = function() {
+          try {
+            var a = semver.coerce(releaseInfo.tag.name);
+            var b = semver.coerce(min_version);
+            return !semver.gte(a, b);
+          } catch (e) {
+            return false;
+          }
+        };
         if (
           !releaseInfo ||
           !releaseInfo.tag.name ||
-          !semver.gte(
-            semver.coerce(releaseInfo.tag.name),
-            semver.coerce(min_version)
-          ) ||
+          !semverchk() ||
           !matchVersion.test(releaseInfo.tag.name)
         ) {
           // ignore this release altogether
