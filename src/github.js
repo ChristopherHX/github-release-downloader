@@ -77,7 +77,7 @@ export class GitHub {
             var b = semver.coerce(min_version);
             return !semver.gte(a, b);
           } catch (e) {
-            return false;
+            return true;
           }
         };
         if (
