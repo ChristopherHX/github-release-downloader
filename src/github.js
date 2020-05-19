@@ -80,13 +80,15 @@ export class GitHub {
             return true;
           }
         };
+        console.log("Release: " + releaseInfo.tag.name);
         if (
           !releaseInfo ||
           !releaseInfo.tag.name ||
-          !semverchk() ||
+          // !semverchk() ||
           !matchVersion.test(releaseInfo.tag.name)
         ) {
           // ignore this release altogether
+          console.log("Ignore Release: " + releaseInfo.tag.name);
           break;
         }
         assetHasNextPage = releaseInfo.releaseAssets.pageInfo.hasNextPage;
